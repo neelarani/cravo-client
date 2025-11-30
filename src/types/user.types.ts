@@ -3,8 +3,8 @@ interface Role {
 }
 
 export interface IUser {
-  id: string;
   email: string;
   full_name: string;
   role: Role[];
+  phone: string;
 }

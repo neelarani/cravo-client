@@ -14,10 +14,10 @@ export const authApi = baseApi.injectEndpoints({
 
     register: build.mutation<
       IResponse<IUser>,
-      { email: string; password: string; full_name: string }
+      { email: string; password: string; full_name: string; phone: string }
     >({
       query: body => ({
-        url: '/user/create-user',
+        url: '/user/register',
         method: 'POST',
         body,
         headers: { 'Content-Type': 'application/json' },

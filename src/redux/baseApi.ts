@@ -8,5 +8,5 @@ export const baseApi = createApi({
   }),
 
   endpoints: () => ({}),
-  tagTypes: ['USER', 'POST', 'PROJECT'],
+  tagTypes: ['USER', 'POST'],
 });
