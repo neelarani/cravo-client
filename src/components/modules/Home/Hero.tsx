@@ -4,7 +4,7 @@ const Hero = () => {
       className="w-full h-[80vh] bg-cover bg-center flex items-center justify-center"
       style={{
         backgroundImage:
-          "url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1935&auto=format&fit=crop')",
+          "url('https://res.cloudinary.com/ddonxd2yp/image/upload/v1764583084/IMG-20230423-WA0029.jpg.jpg')",
       }}
     >
       {/* Overlay */}

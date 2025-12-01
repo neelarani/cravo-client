@@ -22,7 +22,7 @@ export const menuApi = baseApi.injectEndpoints({
       }),
       providesTags: ['MENU'],
     }),
-    getSingleMenu: build.query<IMenu[], string>({
+    getSingleMenu: build.query<IMenu, string>({
       query: id => ({
         url: `/menu/${id}`,
         method: 'GET',

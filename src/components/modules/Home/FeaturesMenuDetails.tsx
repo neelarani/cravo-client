@@ -10,7 +10,8 @@ const FeaturesMenuDetails = () => {
   const { id } = params as { id: string };
 
   const { data, isLoading, error } = menuApi.useGetSingleMenuQuery(id!);
-  const dish: IMenu = data?.data;
+
+  const dish: IMenu = data?.data || [];
 
   if (isLoading)
     return (
