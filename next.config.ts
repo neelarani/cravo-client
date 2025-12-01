@@ -3,11 +3,17 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: [
-      'images.unsplash.com',
-      'i.ibb.co',
-      'encrypted-tbn0.gstatic.com',
-      'www.google.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
+        pathname: '/**',
+      },
     ],
   },
 };

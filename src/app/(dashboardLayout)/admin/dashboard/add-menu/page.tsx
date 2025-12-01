@@ -1,11 +1,11 @@
 import AddMenu from '@/components/modules/Admin/AddMenu';
 
-const AdminDashboardPage = () => {
+const AddMenuPage = () => {
   return (
-    <div>
+    <>
       <AddMenu />
-    </div>
+    </>
   );
 };
 
-export default AdminDashboardPage;
+export default AddMenuPage;

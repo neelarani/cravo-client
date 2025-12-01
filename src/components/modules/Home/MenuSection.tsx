@@ -1,58 +1,29 @@
 'use client';
 
+import { menuApi } from '@/redux';
 import Image from 'next/image';
 import { useState } from 'react';
 
 export default function MenuSection() {
-  // New categories
-  const categories = ['All Items', 'Desserts', 'Drinks', 'Rices'];
+  const categories = ['All Items', 'Desserts', 'Drinks', 'Rices', 'Pizza'];
 
-  const foods = [
-    {
-      id: 1,
-      category: 'Rices',
-      name: 'Chicken Biryani',
-      price: '৳250',
-      img: 'https://i.ibb.co/Vmm0xwN/biryani.jpg',
-    },
-    {
-      id: 2,
-      category: 'Rices',
-      name: 'Kacchi Biryani',
-      price: '৳320',
-      img: 'https://i.ibb.co/Vmm0xwN/biryani.jpg',
-    },
-    {
-      id: 3,
-      category: 'Desserts',
-      name: 'Chocolate Cake',
-      price: '৳200',
-      img: 'https://i.ibb.co/pjJvWQz/chocolate-cake.jpg',
-    },
-    {
-      id: 4,
-      category: 'Desserts',
-      name: 'Ice Cream',
-      price: '৳150',
-      img: 'https://i.ibb.co/J7JxYB6/ice-cream.jpg',
-    },
-    {
-      id: 5,
-      category: 'Drinks',
-      name: 'Lemonade',
-      price: '৳80',
-      img: 'https://i.ibb.co/jHRZ6Xs/lemonade.jpg',
-    },
-    {
-      id: 6,
-      category: 'Drinks',
-      name: 'Iced Tea',
-      price: '৳90',
-      img: 'https://i.ibb.co/kBXgQ8h/iced-tea.jpg',
-    },
-  ];
+  const { data, isLoading, error } = menuApi.useGetAllMenusQuery();
+
+  const foods = data?.data || [];
 
   const [selectedCategory, setSelectedCategory] = useState('All Items');
+
+  if (isLoading) return <p className="text-center mt-10">Loading menu...</p>;
+  if (error)
+    return (
+      <p className="text-center mt-10 text-destructive">Failed to load menu.</p>
+    );
+  if (!foods || !Array.isArray(foods) || foods.length === 0)
+    return (
+      <p className="text-center mt-10 text-muted-foreground">
+        No menu items available.
+      </p>
+    );
 
   const filteredFoods =
     selectedCategory === 'All Items'
@@ -60,7 +31,7 @@ export default function MenuSection() {
       : foods.filter(food => food.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-muted/50">
+    <div className="min-h-screen bg-muted/50 py-12">
       <h1 className="text-4xl font-bold text-center mb-12 text-foreground">
         Menu
       </h1>
@@ -91,22 +62,34 @@ export default function MenuSection() {
         <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredFoods.slice(0, 6).map(food => (
             <div
-              key={food.id}
+              key={food.category}
               className="bg-card shadow rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300"
             >
-              <Image
-                src={food.img}
-                alt={food.name}
-                width={400}
-                height={400}
-                className="w-full h-56 object-cover"
-              />
+              {typeof food.img === 'string' ? (
+                <Image
+                  src={food.img}
+                  alt={food.name}
+                  width={400}
+                  height={400}
+                  className="w-full h-56 object-cover"
+                />
+              ) : (
+                <div className="w-full h-56 bg-gray-200 flex items-center justify-center">
+                  No Image
+                </div>
+              )}
 
               <div className="p-5">
                 <h2 className="text-2xl font-semibold text-foreground mb-1">
                   {food.name}
                 </h2>
-                <p className="text-lg text-primary font-bold mb-2">
+                <p className="text-base text-primary font-semibold mb-2">
+                  {food.description}
+                </p>
+                <p className="text-lg text-primary font-semibold mb-2">
+                  {food.category}
+                </p>
+                <p className="text-lg text-primary font-semibold mb-2">
                   {food.price}
                 </p>
 
@@ -116,6 +99,12 @@ export default function MenuSection() {
               </div>
             </div>
           ))}
+
+          {filteredFoods.length === 0 && (
+            <p className="text-center col-span-full text-muted-foreground mt-10">
+              No items in this category.
+            </p>
+          )}
         </div>
       </div>
     </div>
