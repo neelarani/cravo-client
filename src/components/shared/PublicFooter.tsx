@@ -15,7 +15,7 @@ const PublicFooter = () => {
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Logo + About */}
         <div>
-          <h2 className="text-2xl font-bold text-primary">CRAVA</h2>
+          <h2 className="text-2xl font-bold text-primary">CRAVO</h2>
           <p className="text-muted-foreground mt-3">
             Serving the finest dishes with love. Visit us for an unforgettable
             dining experience.

@@ -71,7 +71,7 @@ const FeaturesMenuDetails = () => {
   return (
     <>
       <div className="min-h-screen py-16 px-4 bg-muted">
-        <div className="container px-12 mx-auto bg-card shadow-lg rounded-xl overflow-hidden grid grid-cols-1 md:grid-cols-2 mt-24">
+        <div className="container md:px-12 mx-auto bg-card shadow-lg rounded-xl overflow-hidden grid grid-cols-1 md:grid-cols-2 mt-24">
           <div className="w-full h-full">
             <Image
               src={dish.img}

@@ -31,7 +31,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-          {children} <Toaster />
+          {children}
+          <Toaster />
         </ReduxProvider>
       </body>
     </html>

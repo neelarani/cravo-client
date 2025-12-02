@@ -15,7 +15,7 @@ export default function PopularItems() {
 
   return (
     <div className="min-h-screen bg-muted/50 py-16 px-4">
-      <h1 className="text-4xl font-bold text-center mb-12 text-primary">
+      <h1 className="text-4xl font-bold text-center md:mb-12 text-primary">
         Featured Dishes
       </h1>
 

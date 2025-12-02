@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         hostname: 'ibb.co',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'randomuser.me',
+        pathname: '/**',
+      },
     ],
   },
 };

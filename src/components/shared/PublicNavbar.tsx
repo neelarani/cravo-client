@@ -67,7 +67,7 @@ const PublicNavbar = () => {
               <li>
                 <Link
                   href="/login"
-                  className="bg-chart-5 text-accent px-4 py-2 rounded-lg hover:opacity-90"
+                  className="border-border border-2  text-accent-foreground px-4 py-2 rounded-lg hover:bg-gray-100"
                 >
                   Login
                 </Link>
@@ -119,7 +119,7 @@ const PublicNavbar = () => {
               <li>
                 <Link
                   href="/login"
-                  className="bg-chart-5 text-accent px-4 py-2 rounded-lg hover:opacity-90"
+                  className="text-accent px-4 py-2 rounded-lg hover:opacity-90"
                 >
                   Login
                 </Link>
