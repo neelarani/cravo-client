@@ -34,7 +34,7 @@ export default function PopularItems() {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto container">
-        {dishes.slice(0, 8).map(dish => (
+        {dishes?.slice(0, 8).map((dish: IMenu) => (
           <div
             key={dish._id}
             className="bg-card text-card-foreground shadow-lg rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300"

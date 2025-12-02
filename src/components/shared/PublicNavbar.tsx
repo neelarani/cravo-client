@@ -8,11 +8,11 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
 const navItems = [
-  { href: '#', label: 'Menu' },
-  { href: '#', label: 'Books' },
+  { href: 'features-menu', label: 'Menu' },
+
   { href: '#contact', label: 'Contact' },
-  { href: '#', label: 'About us' },
-  { href: '#', label: 'items' },
+
+  { href: 'about-us', label: 'About us' },
 ];
 
 const PublicNavbar = () => {

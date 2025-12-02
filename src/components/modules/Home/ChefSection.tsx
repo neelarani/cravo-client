@@ -7,7 +7,7 @@ export default function ChefSection() {
     name: 'Chef Rahim Khan',
     bio: 'With over 12 years of culinary experience, Chef Rahim specializes in Continental and Asian fusion dishes. His creativity brings unique flavors to every plate.',
     experience: '12+ Years Experience',
-    img: 'https://i.ibb.co/1G1Zb91/chef1.jpg',
+    img: 'https://res.cloudinary.com/ddonxd2yp/image/upload/v1761819512/file-1761819506743-248655227.png',
   };
 
   return (
@@ -42,7 +42,7 @@ export default function ChefSection() {
             {chef.bio}
           </p>
 
-          <button className="bg-chadcn-primary px-6 py-2 rounded-xl font-semibold hover:bg-chadcn-primary-hover transition-all">
+          <button className="bg-chadcn-primary px-6 py-2 rounded-xl font-semibold hover:bg-chadcn-primary-hover transition-all cursor-pointer hover:underline">
             Learn More
           </button>
         </div>

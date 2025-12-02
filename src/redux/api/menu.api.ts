@@ -1,5 +1,6 @@
 import { IMenu } from '@/types/menu.types';
 import { baseApi } from '../baseApi';
+import { IResponse } from '@/types/common.types';
 
 export const menuApi = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -48,6 +49,11 @@ export const menuApi = baseApi.injectEndpoints({
         method: 'DELETE',
       }),
       invalidatesTags: ['MENU'],
+    }),
+
+    getCategories: build.query<IResponse<string[]>, void>({
+      query: () => '/menu/categories',
+      providesTags: ['CATEGORIES'],
     }),
   }),
 });

@@ -8,5 +8,5 @@ export const baseApi = createApi({
   }),
 
   endpoints: () => ({}),
-  tagTypes: ['USER', 'MENU', 'GALLERY'],
+  tagTypes: ['USER', 'MENU', 'GALLERY', 'PAYMENT', 'CATEGORIES'],
 });

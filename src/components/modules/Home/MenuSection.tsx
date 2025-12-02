@@ -1,17 +1,20 @@
 'use client';
 
 import { menuApi } from '@/redux';
+import { ArrowBigRight } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function MenuSection() {
-  const categories = ['All Items', 'Desserts', 'Drinks', 'Rices', 'Pizza'];
+  const categories = ['All Items', 'Pizza', 'Drinks', 'Biryani', 'Burger'];
+
+  console.log(categories, 'cat');
+  const [selectedCategory, setSelectedCategory] = useState('All Items');
 
   const { data, isLoading, error } = menuApi.useGetAllMenusQuery();
 
   const foods = data?.data || [];
-
-  const [selectedCategory, setSelectedCategory] = useState('All Items');
 
   if (isLoading) return <p className="text-center mt-10">Loading menu...</p>;
   if (error)
@@ -42,7 +45,7 @@ export default function MenuSection() {
           <h2 className="text-xl font-bold mb-4">Categories</h2>
 
           <div className="flex md:flex-col gap-4">
-            {categories.map(cat => (
+            {categories?.map(cat => (
               <button
                 key={cat}
                 className={`px-4 py-2 rounded-lg cursor-pointer font-semibold transition-colors text-left ${
@@ -62,7 +65,7 @@ export default function MenuSection() {
         <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredFoods.slice(0, 6).map(food => (
             <div
-              key={food.category}
+              key={food._id}
               className="bg-card shadow rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300"
             >
               {typeof food.img === 'string' ? (
@@ -90,12 +93,16 @@ export default function MenuSection() {
                   {food.category}
                 </p>
                 <p className="text-lg text-primary font-semibold mb-2">
-                  {food.price}
+                  ${food.price}
                 </p>
 
-                <button className="w-full bg-chart-5 text-primary-foreground py-2 rounded-xl font-semibold hover:opacity-90 transition-all cursor-pointer">
-                  Add to Cart
-                </button>
+                <Link
+                  href={`/features-menu/${food._id}`}
+                  className="w-full bg-chart-5 text-primary-foreground py-2 rounded-xl font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  Details
+                  <ArrowBigRight />
+                </Link>
               </div>
             </div>
           ))}
