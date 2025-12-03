@@ -4,7 +4,6 @@
 import Image from 'next/image';
 import { menuApi } from '@/redux';
 import { useParams, useRouter } from 'next/navigation';
-import { IMenu } from '@/types/menu.types';
 import { useState } from 'react';
 import { paymentApi } from '@/redux/api/payment.api';
 import toast from 'react-hot-toast';
@@ -13,7 +12,7 @@ const FeaturesMenuDetails = () => {
   const params = useParams();
   const { id } = params as { id: string };
   const { data, isLoading, error } = menuApi.useGetSingleMenuQuery(id!);
-  const dish: IMenu = data?.data || {};
+  const dish = data?.data;
   const router = useRouter();
 
   const [openModal, setOpenModal] = useState(false);

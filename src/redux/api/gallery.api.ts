@@ -1,5 +1,6 @@
 import { IGallery } from '@/types/gallery.types';
 import { baseApi } from '../baseApi';
+import { IResponse } from '@/types/common.types';
 
 export const galleryApi = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -15,7 +16,7 @@ export const galleryApi = baseApi.injectEndpoints({
       invalidatesTags: ['GALLERY'],
     }),
 
-    getAllGallery: build.query<IGallery[], void>({
+    getAllGallery: build.query<IResponse<IGallery[]>, void>({
       query: () => ({
         url: '/gallery',
         method: 'GET',

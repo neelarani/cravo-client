@@ -34,7 +34,7 @@ export default function MenuSection() {
       : foods.filter(food => food.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-muted/50 py-12">
+    <div className=" bg-muted/50 ">
       <h1 className="text-4xl font-bold text-center mb-12 text-foreground">
         Menu
       </h1>

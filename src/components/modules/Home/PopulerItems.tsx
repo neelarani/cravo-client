@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import Image from 'next/image';
@@ -11,7 +10,7 @@ import { IMenu } from '@/types/menu.types';
 export default function PopularItems() {
   const { data, isLoading, error } = menuApi.useGetAllMenusQuery();
 
-  const dishes: IMenu = data?.data || [];
+  const dishes = data?.data || [];
 
   return (
     <div className="min-h-screen bg-muted/50 py-16 px-4">
@@ -34,7 +33,7 @@ export default function PopularItems() {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto container">
-        {dishes?.slice(0, 8).map((dish: IMenu) => (
+        {dishes?.slice(0, 4).map((dish: IMenu) => (
           <div
             key={dish._id}
             className="bg-card text-card-foreground shadow-lg rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300"

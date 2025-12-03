@@ -16,14 +16,14 @@ export const menuApi = baseApi.injectEndpoints({
       invalidatesTags: ['MENU'],
     }),
 
-    getAllMenus: build.query<IMenu[], void>({
+    getAllMenus: build.query<IResponse<IMenu[]>, void>({
       query: () => ({
         url: '/menu',
         method: 'GET',
       }),
       providesTags: ['MENU'],
     }),
-    getSingleMenu: build.query<IMenu, string>({
+    getSingleMenu: build.query<IResponse<IMenu>, string>({
       query: id => ({
         url: `/menu/${id}`,
         method: 'GET',
@@ -51,7 +51,7 @@ export const menuApi = baseApi.injectEndpoints({
       invalidatesTags: ['MENU'],
     }),
 
-    getCategories: build.query<IResponse<string[]>, void>({
+    getCategories: build.query<IResponse<IMenu[]>, void>({
       query: () => '/menu/categories',
       providesTags: ['CATEGORIES'],
     }),
