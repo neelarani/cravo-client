@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 const navItems = [
   { href: 'features-menu', label: 'Menu' },
-  { href: '#contact', label: 'Contact' },
+  { href: 'contact', label: 'Contact' },
   { href: 'about-us', label: 'About us' },
 ];
 

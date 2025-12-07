@@ -4,7 +4,7 @@ import React from 'react';
 
 const AboutUs = () => {
   return (
-    <div className="bg-chadcn-background text-chadcn-foreground">
+    <div className="bg-chadcn-background text-chadcn-foreground mt-24">
       {/* Hero Section */}
       <section className="py-20 text-center ">
         <h1 className="text-5xl font-bold mb-4">About Us</h1>
