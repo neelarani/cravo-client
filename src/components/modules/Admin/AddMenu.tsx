@@ -78,7 +78,7 @@ const AddMenu = () => {
   };
 
   return (
-    <Card className="w-full p-6 bg-card text-card-foreground border border-border shadow-xl">
+    <Card className=" max-w-6xl mx-auto p-16 bg-card text-card-foreground border border-border shadow-xl">
       <CardHeader>
         <CardTitle className="text-center text-3xl font-bold">
           Add New Menu

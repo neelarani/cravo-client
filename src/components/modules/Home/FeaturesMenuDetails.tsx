@@ -109,7 +109,7 @@ const FeaturesMenuDetails = () => {
       </div>
 
       {openModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-[9999] px-4">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center  px-4">
           <div className="bg-card p-8 rounded-xl shadow-xl w-full max-w-lg relative">
             <button
               className="absolute top-3 right-3 text-4xl font-bold text-foreground hover:text-primary cursor-pointer"

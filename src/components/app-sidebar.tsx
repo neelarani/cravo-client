@@ -1,8 +1,6 @@
 'use client';
 
-import * as React from 'react';
 import Link from 'next/link';
-import { NavUser } from '@/components/nav-user';
 
 import {
   Sidebar,
@@ -11,50 +9,61 @@ import {
   SidebarHeader,
   SidebarRail,
 } from '@/components/ui/sidebar';
-
 import { Home, PlusCircle, ListOrdered, Users, LogOut } from 'lucide-react';
+import { authApi } from '@/redux';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
-// Sample Data
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-};
+export function AppSidebar() {
+  const router = useRouter();
+  const { data: user, isLoading } = authApi.useGetMeQuery();
+  const [logout] = authApi.useLogoutMutation();
 
-// Sidebar Navigation Items
-const navItems = [
-  {
-    title: 'Dashboard',
-    href: '/admin/dashboard',
-    icon: Home,
-  },
-  {
-    title: 'Add Menu',
-    href: '/admin/dashboard/add-menu',
-    icon: PlusCircle,
-  },
-  {
-    title: 'All Menu',
-    href: '/admin/dashboard/menus',
-    icon: ListOrdered,
-  },
-  {
-    title: 'Users',
-    href: '/admin/dashboard/users',
-    icon: Users,
-  },
-  {
-    title: 'Home',
-    href: '/',
-    icon: Home,
-  },
-];
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      toast.success('Successfully logged out');
+      router.push('/login');
+    } catch {
+      toast.error('Failed to logout!');
+    }
+  };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  if (isLoading) return <div>Loading...</div>;
+  if (!user?.data) return null;
+
+  const navItems =
+    user.data.role === 'ADMIN'
+      ? [
+          { title: 'Dashboard', href: '/admin/dashboard', icon: Home },
+          {
+            title: 'My Profile',
+            href: '/my-profile',
+            icon: Users,
+          },
+          {
+            title: 'Add Menu',
+            href: '/admin/dashboard/add-menu',
+            icon: PlusCircle,
+          },
+
+          { title: 'Users', href: '/admin/dashboard/users', icon: Users },
+          { title: 'Home', href: '/', icon: Home },
+        ]
+      : [
+          { title: 'Dashboard', href: '/user/dashboard', icon: Home },
+          { title: 'Profile', href: '/my-profile', icon: Users },
+
+          {
+            title: 'My Orders',
+            href: '/user/dashboard/my-orders',
+            icon: ListOrdered,
+          },
+          { title: 'Home', href: '/', icon: Home },
+        ];
+
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon">
       <SidebarHeader />
 
       {/* SIDEBAR CONTENT */}
@@ -75,9 +84,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       {/* FOOTER */}
       <SidebarFooter>
-        <NavUser user={data.user} />
-
-        <button className="flex items-center gap-3 p-2 mt-2 rounded-md hover:bg-red-100 text-sm text-red-600 w-full">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 p-2 mt-2 rounded-md hover:bg-red-100 text-sm text-red-600 w-full"
+        >
           <LogOut className="w-4 h-4" />
           Logout
         </button>

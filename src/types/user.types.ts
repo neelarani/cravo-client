@@ -1,10 +1,8 @@
-interface Role {
-  role: 'USER' | 'ADMIN' | 'SUPPER_ADMIN';
-}
-
 export interface IUser {
+  _id: string;
   email: string;
   full_name: string;
-  role: Role[];
+  avatar_url: string;
+  role: string;
   phone: string;
 }

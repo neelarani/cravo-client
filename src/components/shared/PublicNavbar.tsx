@@ -6,20 +6,21 @@ import { Menu, X } from 'lucide-react';
 import { authApi } from '@/redux';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const navItems = [
   { href: 'features-menu', label: 'Menu' },
-
   { href: '#contact', label: 'Contact' },
-
   { href: 'about-us', label: 'About us' },
 ];
 
 const PublicNavbar = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // Mobile menu toggle
+  const [dropdownOpen, setDropdownOpen] = useState(false); // User dropdown toggle
   const router = useRouter();
 
   const { data: user } = authApi.useGetMeQuery();
+  console.log(user);
   const [logout] = authApi.useLogoutMutation();
 
   const handleLogout = async () => {
@@ -52,22 +53,64 @@ const PublicNavbar = () => {
               </Link>
             </li>
           ))}
-          {/* Conditional Buttons */}
+
+          {/* Conditional User Section */}
           {user ? (
-            <li>
-              <button
-                onClick={handleLogout}
-                className="bg-destructive text-white px-4 py-2 rounded-lg hover:opacity-90 cursor-pointer"
-              >
-                Logout
-              </button>
+            <li className="relative">
+              {/* User Avatar */}
+              <Image
+                src={
+                  user.data?.avatar_url ||
+                  'https://res.cloudinary.com/ddonxd2yp/image/upload/v1765097100/free-vector-user-icon_901408-589_vvlbe0.avif'
+                }
+                alt="User Avatar"
+                width={40}
+                height={40}
+                className="rounded-full cursor-pointer"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              />
+
+              {/* Dropdown */}
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg py-2 z-50 text-sm md:text-base space-y-2">
+                  <p className="px-4 py-2 text-gray-700">
+                    Email: {user.data?.email}
+                  </p>
+
+                  {/* Role-based Dashboard Link */}
+                  {user.data?.role === 'ADMIN' ? (
+                    <Link
+                      href="/admin/dashboard"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-all duration-300"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  ) : user.data?.role === 'USER' ? (
+                    <Link
+                      href="/user/dashboard"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-all duration-300"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  ) : null}
+
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 transition-all duration-300 cursor-pointer"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </li>
           ) : (
             <>
               <li>
                 <Link
                   href="/login"
-                  className="border-border border-2  text-accent-foreground px-4 py-2 rounded-lg hover:bg-gray-100"
+                  className="border-border border-2 text-accent-foreground px-4 py-2 rounded-lg hover:bg-gray-100"
                 >
                   Login
                 </Link>
@@ -84,7 +127,7 @@ const PublicNavbar = () => {
           )}
         </ul>
 
-        {/* Mobile Toggle */}
+        {/* Mobile Toggle Button */}
         <button className="md:hidden" onClick={() => setOpen(!open)}>
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -104,6 +147,7 @@ const PublicNavbar = () => {
               </Link>
             </li>
           ))}
+
           {/* Conditional Buttons */}
           {user ? (
             <li>

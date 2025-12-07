@@ -2,7 +2,7 @@ import AddMenu from '@/components/modules/Admin/AddMenu';
 
 const AdminDashboardPage = () => {
   return (
-    <div>
+    <div >
       <AddMenu />
     </div>
   );

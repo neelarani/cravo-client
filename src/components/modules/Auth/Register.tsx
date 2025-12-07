@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { toast } from 'react-hot-toast';
 import { authApi } from '@/redux';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // Zod schema
 const registerSchema = z.object({
@@ -18,6 +19,7 @@ const registerSchema = z.object({
 type RegisterData = z.infer<typeof registerSchema>;
 
 export default function Register() {
+  const router = useRouter();
   const [formData, setFormData] = useState<RegisterData>({
     name: '',
     email: '',
@@ -55,9 +57,9 @@ export default function Register() {
         password: formData.password,
       }).unwrap();
 
-      console.log(formData);
       toast.success(`Registration successful! Welcome, ${formData.name}`);
       setFormData({ name: '', email: '', phone: '', password: '' });
+      router.push('/login');
     } catch (error: any) {
       toast.error(error?.data?.message || 'Registration failed');
     }
