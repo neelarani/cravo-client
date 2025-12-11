@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 const AboutUs = () => {
   return (
     <div className="bg-chadcn-background text-chadcn-foreground mt-24">

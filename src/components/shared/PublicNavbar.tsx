@@ -15,8 +15,8 @@ const navItems = [
 ];
 
 const PublicNavbar = () => {
-  const [open, setOpen] = useState(false); // Mobile menu toggle
-  const [dropdownOpen, setDropdownOpen] = useState(false); // User dropdown toggle
+  const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
 
   const { data: user } = authApi.useGetMeQuery();

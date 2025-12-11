@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { authApi } from '@/redux';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Eye, EyeOff } from 'lucide-react';
 
 // Zod schema
 const registerSchema = z.object({
@@ -20,13 +21,16 @@ type RegisterData = z.infer<typeof registerSchema>;
 
 export default function Register() {
   const router = useRouter();
+
   const [formData, setFormData] = useState<RegisterData>({
     name: '',
     email: '',
     phone: '',
     password: '',
   });
+
   const [errors, setErrors] = useState<Partial<RegisterData>>({});
+  const [showPassword, setShowPassword] = useState(false);
 
   const [register, { isLoading }] = authApi.useRegisterMutation();
 
@@ -75,6 +79,7 @@ export default function Register() {
           Register
         </h2>
 
+        {/* Name */}
         <input
           type="text"
           name="name"
@@ -87,6 +92,7 @@ export default function Register() {
           <p className="text-destructive text-sm">{errors.name}</p>
         )}
 
+        {/* Email */}
         <input
           type="email"
           name="email"
@@ -99,6 +105,7 @@ export default function Register() {
           <p className="text-destructive text-sm">{errors.email}</p>
         )}
 
+        {/* Phone */}
         <input
           type="tel"
           name="phone"
@@ -111,18 +118,32 @@ export default function Register() {
           <p className="text-destructive text-sm">{errors.phone}</p>
         )}
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full p-2 rounded-lg border border-gray-300"
-        />
+        {/* Password with eye icon */}
+        <div className="relative">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full p-2 pr-10 rounded-lg border border-gray-300"
+          />
+
+          {/* Eye button */}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-2 text-gray-600"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
+        </div>
+
         {errors.password && (
           <p className="text-destructive text-sm">{errors.password}</p>
         )}
 
+        {/* Submit button */}
         <button
           type="submit"
           disabled={isLoading}
@@ -130,11 +151,12 @@ export default function Register() {
         >
           {isLoading ? 'Registering...' : 'Register'}
         </button>
-        <div>
-          <Link href={'/login'}>
+
+        <div className="text-center">
+          <Link href="/login">
             Already you have an account?{' '}
             <span className="text-blue-500 font-semibold underline cursor-pointer">
-              login
+              Login
             </span>
           </Link>
         </div>

@@ -6,6 +6,8 @@ import { z } from 'zod';
 import { toast } from 'react-hot-toast';
 import { authApi } from '@/redux';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Eye, EyeOff } from 'lucide-react';
 
 // Zod schema
 const loginSchema = z.object({
@@ -17,6 +19,8 @@ type LoginData = z.infer<typeof loginSchema>;
 
 export default function Login() {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+
   const [formData, setFormData] = useState<LoginData>({
     email: '',
     password: '',
@@ -81,14 +85,25 @@ export default function Login() {
           <p className="text-destructive text-sm">{errors.email}</p>
         )}
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full p-2 rounded-lg border border-gray-300"
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full p-2 pr-10 rounded-lg border border-gray-300"
+          />
+
+          {/* Eye button */}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-2 text-gray-600"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
+        </div>
         {errors.password && (
           <p className="text-destructive text-sm">{errors.password}</p>
         )}
@@ -100,6 +115,17 @@ export default function Login() {
         >
           {isLoading ? 'Logging in...' : 'Login'}
         </button>
+        <div>
+          <Link href={'/register'}>
+            You Don&#39;t have an account?{' '}
+            <span className="text-blue-500 text-base font-semibold underline cursor-pointer">
+              join
+            </span>
+          </Link>
+        </div>
+        <p className="text-base hover:underline cursor-pointer">
+          Forgot Password
+        </p>
       </form>
     </div>
   );
