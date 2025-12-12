@@ -123,9 +123,12 @@ export default function Login() {
             </span>
           </Link>
         </div>
-        <p className="text-base hover:underline cursor-pointer">
+        <Link
+          href={'/forgot-password'}
+          className="text-base hover:underline cursor-pointer text-blue-500"
+        >
           Forgot Password
-        </p>
+        </Link>
       </form>
     </div>
   );
